@@ -46,6 +46,7 @@ RUN         useradd -g wheel ${SUDO_USER} \
 
 EXPOSE      9000
 
+CMD         ["/usr/sbin/init"]
 CMD         ["sudo", "bash", "/opt/corenlp/start-service.sh"]
 #CMD         ["sudo", "systemctl", "start", "corenlp"]
 
