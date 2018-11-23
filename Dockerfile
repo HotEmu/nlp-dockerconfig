@@ -46,7 +46,7 @@ RUN         useradd -g wheel ${SUDO_USER} \
 
 EXPOSE      9000
 
-CMD         ["sudo", "bash", "${CORENLP_PERMANANT_LOCATION}/start-service.sh"]
+CMD         ["sudo", "bash", "/opt/corenlp/start-service.sh"]
 #CMD         ["sudo", "systemctl", "start", "corenlp"]
 
 #CMD         ["bash", "-mx4g", "-cp", "*", "edu.stanford.nlp.pipeline.StanfordCoreNLPServer", "-port", "9000"]
