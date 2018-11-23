@@ -23,7 +23,10 @@ RUN         wget -O ${CORENLP_ARCHIVE_TMP_ZIP} "http://nlp.stanford.edu/software
             && rm ${CORENLP_ARCHIVE_TMP_ZIP} \
             && cd ${CORENLP_PERMANANT_LOCATION}
 
-RUN         git clone
+RUN         rm "${CORENLP_PERMANANT_LOCATION}/corenlp.sh" \
+            && wget "https://raw.githubusercontent.com/HotEmu/dockerfiles/master/corenlp.sh" -P ${CORENLP_PERMANANT_LOCATION}
+
+RUN         sudo wget "https://raw.githubusercontent.com/HotEmu/dockerfiles/master/corenlp.service" -P "/etc/systemd/system"
 
 RUN         useradd -g wheel ${SUDO_USER} \
             && echo "${SUDO_USER}:${SUDO_USER_PASS}" | chpasswd \
@@ -39,8 +42,9 @@ RUN         useradd -g wheel ${SUDO_USER} \
             && sudo chmod 600 /etc/authbind/byport/80
 
 EXPOSE      80
-#CMD         ["sudo", "service", "corenlp", "start"]
-#CMD         ["sudo", "service", "corenlp", "status"]
+
+#CMD         ["sudo", "systemctl", "daemon-reload"]
+#CMD         ["sudo", "systemctl", "start", "corenlp"]
 
 #CMD         ["bash", "-mx4g", "-cp", "*", "edu.stanford.nlp.pipeline.StanfordCoreNLPServer", "-port", "9000"]
 

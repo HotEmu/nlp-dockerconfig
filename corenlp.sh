@@ -18,5 +18,9 @@ else
   scriptdir=$(dirname "$scriptpath")
 fi
 
-echo java -mx5g -cp \"$scriptdir/*\" edu.stanford.nlp.pipeline.StanfordCoreNLP $*
-java -mx5g -cp "$scriptdir/*" edu.stanford.nlp.pipeline.StanfordCoreNLP -XX:+CrashOnOutOfMemoryError $*
+NUMBER_OF_CORES=`getconf _NPROCESSORS_ONLN`
+
+echo "Starting CoreNLP with ${NUMBER_OF_CORES}"
+
+echo java -mx4g -cp "$scriptdir/*" edu.stanford.nlp.pipeline.StanfordCoreNLPServer -port 9000 -timeout 15000 -XX:+CrashOnOutOfMemoryError $*
+java -mx4g -cp "$scriptdir/*" edu.stanford.nlp.pipeline.StanfordCoreNLPServer -annotators tokenize,ssplit,pos,parse,sentiment -threads ${NUMBER_OF_CORES} -port 9000 -timeout 15000 -XX:+CrashOnOutOfMemoryError $*
