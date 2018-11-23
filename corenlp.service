@@ -1,0 +1,14 @@
+## Place in directory:/etc/systemd/system
+
+[Unit]
+Description=Starts CoreNLP server as a service.
+
+[Service]
+Restart=always
+RestartSec=5
+ExecStart=/opt/corenlp/corenlp.sh
+Type=simple
+User=nlp
+
+[Install]
+WantedBy=multi-user.target
