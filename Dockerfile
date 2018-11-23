@@ -24,7 +24,10 @@ RUN         wget -O ${CORENLP_ARCHIVE_TMP_ZIP} "http://nlp.stanford.edu/software
             && cd ${CORENLP_PERMANANT_LOCATION}
 
 RUN         rm "${CORENLP_PERMANANT_LOCATION}/corenlp.sh" \
-            && wget "https://raw.githubusercontent.com/HotEmu/dockerfiles/master/corenlp.sh" -P ${CORENLP_PERMANANT_LOCATION}
+            && wget "https://raw.githubusercontent.com/HotEmu/dockerfiles/master/corenlp.sh" -P ${CORENLP_PERMANANT_LOCATION} \
+            && wget "https://raw.githubusercontent.com/HotEmu/dockerfiles/master/start-service.sh" -P ${CORENLP_PERMANANT_LOCATION} \
+            && sudo chmod a+x "${CORENLP_PERMANANT_LOCATION}/corenlp.sh" \
+            && sudo chmod a+x "${CORENLP_PERMANANT_LOCATION}/start-service.sh"
 
 RUN         sudo wget "https://raw.githubusercontent.com/HotEmu/dockerfiles/master/corenlp.service" -P "/etc/systemd/system"
 
@@ -37,13 +40,13 @@ RUN         useradd -g wheel ${SUDO_USER} \
             && sudo groupadd nlp \
             && usermod -a -G nlp nlp \
             && sudo mkdir -p /etc/authbind/byport/ \
-            && sudo touch /etc/authbind/byport/80 \
-            && sudo chown nlp:nlp /etc/authbind/byport/80 \
-            && sudo chmod 600 /etc/authbind/byport/80
+            && sudo touch /etc/authbind/byport/9000 \
+            && sudo chown nlp:nlp /etc/authbind/byport/9000 \
+            && sudo chmod 600 /etc/authbind/byport/9000
 
-EXPOSE      80
+EXPOSE      9000
 
-#CMD         ["sudo", "systemctl", "daemon-reload"]
+CMD         ["sudo", "bash", "${CORENLP_PERMANANT_LOCATION}/start-service.sh"]
 #CMD         ["sudo", "systemctl", "start", "corenlp"]
 
 #CMD         ["bash", "-mx4g", "-cp", "*", "edu.stanford.nlp.pipeline.StanfordCoreNLPServer", "-port", "9000"]
