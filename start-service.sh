@@ -2,7 +2,8 @@
 
 echo "Starting CoreNLP script"
 
-sudo /usr/sbin/init
+sudo /usr/bin/systemctl restart autofs &
+sudo exec /usr/sbin/init
 
 sudo systemctl is-system-running
 
