@@ -21,8 +21,8 @@ fi
 NUMBER_OF_CORES=`getconf _NPROCESSORS_ONLN`
 
 echo "Starting CoreNLP with ${NUMBER_OF_CORES}"
-echo "CoreNLP username ${NUMBER_OF_CORES}"
-echo "CoreNLP password ${NUMBER_OF_CORES}"
+echo "CoreNLP username ${CORENLP_USERNAME}"
+echo "CoreNLP password ${CORENLP_PASSWORD}"
 
 
 echo java -mx4g -cp "$scriptdir/*" edu.stanford.nlp.pipeline.StanfordCoreNLPServer -port 9000 -timeout 15000 -XX:+CrashOnOutOfMemoryError $*
