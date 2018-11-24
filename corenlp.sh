@@ -18,6 +18,10 @@ else
   scriptdir=$(dirname "$scriptpath")
 fi
 
+source env_vars.sh
+
+printenv
+
 NUMBER_OF_CORES=`getconf _NPROCESSORS_ONLN`
 
 echo "Starting CoreNLP with ${NUMBER_OF_CORES}"

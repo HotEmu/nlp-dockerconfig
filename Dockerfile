@@ -29,8 +29,6 @@ RUN         wget -O ${CORENLP_ARCHIVE_TMP_ZIP} "http://nlp.stanford.edu/software
 
 COPY        env_vars.sh ${CORENLP_PERMANANT_LOCATION}/env_vars.sh
 
-RUN         source ${CORENLP_PERMANANT_LOCATION}/env_vars.sh
-
 RUN         rm "${CORENLP_PERMANANT_LOCATION}/corenlp.sh" \
             && wget "https://raw.githubusercontent.com/HotEmu/dockerfiles/master/corenlp.sh" -P ${CORENLP_PERMANANT_LOCATION} \
             && sudo chmod a+x "${CORENLP_PERMANANT_LOCATION}/corenlp.sh"
