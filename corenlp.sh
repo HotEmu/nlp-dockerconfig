@@ -20,14 +20,9 @@ fi
 
 source /opt/corenlp/env_vars.sh
 
-printenv
-
 NUMBER_OF_CORES=`getconf _NPROCESSORS_ONLN`
 
 echo "Starting CoreNLP with ${NUMBER_OF_CORES}"
-echo "CoreNLP username ${CORENLP_USERNAME}"
-echo "CoreNLP password ${CORENLP_PASSWORD}"
-
 
 echo java -mx4g -cp "$scriptdir/*" edu.stanford.nlp.pipeline.StanfordCoreNLPServer -port 9000 -timeout 15000 -XX:+CrashOnOutOfMemoryError $*
 java -mx4g -cp "$scriptdir/*" edu.stanford.nlp.pipeline.StanfordCoreNLPServer -annotators tokenize,ssplit,pos,parse,sentiment -threads ${NUMBER_OF_CORES} -port 9000 -timeout 15000 -username ${CORENLP_USERNAME} -password ${CORENLP_PASSWORD} -XX:+CrashOnOutOfMemoryError $*
