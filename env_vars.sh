@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+CORENLP_USERNAME=jjpR[LW%zuTm3}sh
+CORENLP_PASSWORD=gk[NDjCahG\2D{F{
+export CORENLP_USERNAME
+export CORENLP_PASSWORD

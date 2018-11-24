@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+CORENLP_USERNAME=foo
+CORENLP_PASSWORD=bar
+export CORENLP_USERNAME
+export CORENLP_PASSWORD
