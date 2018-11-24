@@ -40,14 +40,14 @@ RUN         useradd -g wheel ${SUDO_USER} \
             && sudo groupadd nlp \
             && usermod -a -G nlp nlp \
             && sudo mkdir -p /etc/authbind/byport/ \
-            && sudo touch /etc/authbind/byport/9000 \
-            && sudo chown nlp:nlp /etc/authbind/byport/9000 \
-            && sudo chmod 600 /etc/authbind/byport/9000
-
-EXPOSE      9000
+            && sudo touch /etc/authbind/byport/80 \
+            && sudo chown nlp:nlp /etc/authbind/byport/80 \
+            && sudo chmod 600 /etc/authbind/byport/80
+            && systemctl is-system-running
+            && systemctl enable corenlp.service
 
 CMD         ["/usr/sbin/init"]
-CMD         ["sudo", "bash", "/opt/corenlp/start-service.sh"]
+#CMD         ["sudo", "bash", "/opt/corenlp/start-service.sh"]
 #CMD         ["sudo", "systemctl", "start", "corenlp"]
 
 #CMD         ["bash", "-mx4g", "-cp", "*", "edu.stanford.nlp.pipeline.StanfordCoreNLPServer", "-port", "9000"]
