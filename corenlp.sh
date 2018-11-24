@@ -18,7 +18,7 @@ else
   scriptdir=$(dirname "$scriptpath")
 fi
 
-source env_vars.sh
+source /opt/corenlp/env_vars.sh
 
 printenv
 
